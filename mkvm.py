@@ -31,41 +31,17 @@ arch = sys.argv[1]
 release = sys.argv[2]
 
 commands = [
-    """cat >> /etc/rc.local <<EOF
-(
-  export PATH=/usr/pkg/bin:/usr/pkg/sbin:${PATH}
-  export GOROOT_BOOTSTRAP=/usr/pkg/go14
-  set -x
-  echo 'starting buildlet script'
-  netstat -rn
-  cat /etc/resolv.conf
-  dig metadata.google.internal
-  (
-    set -e
-    curl -o /buildlet \$(curl -H 'Metadata-Flavor: Google' http://metadata.google.internal/computeMetadata/v1/instance/attributes/buildlet-binary-url)
-    chmod +x /buildlet
-    exec /buildlet
-  )
-  echo 'giving up'
-  sleep 10
-  halt -p
-)
-EOF""",
     """cat > /etc/ifconfig.vioif0 << EOF
 !/usr/pkg/sbin/dhcpcd vioif0
 !route add default \`ifconfig vioif0 | awk '/inet / { print \$2 }' | sed 's/[0-9]*$/1/'\` -ifp vioif0
 EOF""",
     "dhcpcd",
-    "env PKG_PATH=https://cdn.netbsd.org/pub/pkgsrc/packages/NetBSD/%s/%s/All/ pkg_add bash curl dhcpcd" % (arch, release),
-    "env PKG_PATH=https://cdn.netbsd.org/pub/pkgsrc/packages/NetBSD/%s/%s/All/ pkg_add git-base" % (arch, release),
-    "env PKG_PATH=https://cdn.netbsd.org/pub/pkgsrc/packages/NetBSD/%s/%s/All/ pkg_add mozilla-rootcerts go14" % (arch, release),
+    "env PKG_PATH=https://cdn.netbsd.org/pub/pkgsrc/packages/NetBSD/%s/%s/All/ pkg_add dhcpcd" % (arch, release),
     """ed /etc/fstab << EOF
 H
 %s/wd0/sd0/
 wq
 EOF""",
-    "touch /etc/openssl/openssl.cnf",
-    "/usr/pkg/sbin/mozilla-rootcerts install",
     "sync; shutdown -hp now",
 ]
 

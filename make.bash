@@ -10,13 +10,12 @@
 #  - GNU tar (not BSD tar)
 #  - Python 2.7
 #  - python-pexpect
+#  - coreutils (for sha1sum)
 
 set -e -x
 
 ANITA_VERSION=1.39
 ARCH=amd64
-# Actually, the release is 7.99.26 (-current) but this is what the packages
-# have been built for.
 RELEASE=7.0
 
 # Must use GNU tar. On NetBSD, tar is BSD tar and gtar is GNU.
