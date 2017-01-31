@@ -24,6 +24,11 @@ if which gtar > /dev/null; then
   TAR=gtar
 fi
 
+SHA1SUM=sha1sum
+if which gsha1sum > /dev/null; then
+  SHA1SUM=gsha1sum
+fi
+
 WORKDIR=work-NetBSD-${ARCH}
 
 # Remove WORKDIR unless -k (keep) is given.
@@ -32,12 +37,12 @@ if [ "$1" != "-k" ]; then
 fi
 
 # Download and build anita (automated NetBSD installer).
-if ! sha1sum -c anita-${ANITA_VERSION}.tar.gz.sha1; then
+if ! ${SHA1SUM} -c anita-${ANITA_VERSION}.tar.gz.sha1; then
   curl -vO http://www.gson.org/netbsd/anita/download/anita-${ANITA_VERSION}.tar.gz
-  sha1sum -c anita-${ANITA_VERSION}.tar.gz.sha1 || exit 1
+  ${SHA1SUM} -c anita-${ANITA_VERSION}.tar.gz.sha1 || exit 1
 fi
 
-tar xfz anita-${ANITA_VERSION}.tar.gz
+${TAR} xfz anita-${ANITA_VERSION}.tar.gz
 cd anita-${ANITA_VERSION}
 python setup.py build
 cd ..
