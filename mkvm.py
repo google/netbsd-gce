@@ -48,7 +48,7 @@ EOF""",
 
 a = anita.Anita(
     # TODO(bsiegert) use latest
-    anita.URL("https://cdn.NetBSD.org/pub/NetBSD/NetBSD-7.1_RC1/%s/" % arch),
+    anita.URL("https://cdn.NetBSD.org/pub/NetBSD/NetBSD-7.1_RC2/%s/" % arch),
     workdir="work-NetBSD-%s" % arch,
     disk_size="4G",
     memory_size = "1G",
