@@ -16,7 +16,7 @@ set -e -x
 
 ANITA_VERSION=1.39
 ARCH=amd64
-RELEASE=7.0
+RELEASE=7.0_2016Q4
 
 # Must use GNU tar. On NetBSD, tar is BSD tar and gtar is GNU.
 TAR=tar
