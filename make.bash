@@ -15,8 +15,8 @@
 set -e -x
 
 ANITA_VERSION=1.42
-ARCH=amd64
-RELEASE=8.0_2017Q2
+ARCH=${1:-amd64}
+RELEASE=${2:-netbsd-8}
 
 # Must use GNU tar. On NetBSD, tar is BSD tar and gtar is GNU.
 TAR=tar
@@ -29,7 +29,7 @@ if which gsha1sum > /dev/null; then
   SHA1SUM=gsha1sum
 fi
 
-WORKDIR=work-NetBSD-${ARCH}
+WORKDIR=work-${RELEASE}-${ARCH}
 
 # Remove WORKDIR unless -k (keep) is given.
 if [ "$1" != "-k" ]; then

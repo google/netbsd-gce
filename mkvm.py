@@ -7,7 +7,7 @@ import anita
 import ftplib
 import sys
 
-def find_latest_release(arch):
+def find_latest_release(branch, arch):
   """Find the latest NetBSD-current release for the given arch.
 
   Returns:
@@ -15,7 +15,7 @@ def find_latest_release(arch):
   """
   conn = ftplib.FTP('nyftp.netbsd.org')
   conn.login()
-  conn.cwd('/pub/NetBSD-daily/HEAD')
+  conn.cwd('/pub/NetBSD-daily/%s' % branch)
   releases = conn.nlst()
   releases.sort(reverse=True)
   for r in releases:
@@ -24,19 +24,17 @@ def find_latest_release(arch):
       next
     has_arch = [a for a in archs if a.endswith(arch)]
     if has_arch:
-      return "ftp://nyftp.netbsd.org/pub/NetBSD-daily/HEAD/%s/" % has_arch[0]
+      return "https://nycdn.netbsd.org/pub/NetBSD-daily/%s/%s/" % (branch, has_arch[0])
 
 
 arch = sys.argv[1]
-release = sys.argv[2]
+branch = sys.argv[2]
 
 commands = [
     """cat > /etc/ifconfig.vioif0 << EOF
-!/usr/pkg/sbin/dhcpcd vioif0
-!route add default \`ifconfig vioif0 | awk '/inet / { print \$2 }' | sed 's/[0-9]*$/1/'\` -ifp vioif0
+!dhcpcd vioif0
 EOF""",
     "dhcpcd",
-    "env PKG_PATH=https://cdn.netbsd.org/pub/pkgsrc/packages/NetBSD/%s/%s/All/ pkg_add dhcpcd" % (arch, release),
     """ed /etc/fstab << EOF
 H
 %s/wd0/sd0/
@@ -47,9 +45,8 @@ EOF""",
 
 
 a = anita.Anita(
-    # TODO(bsiegert) use latest
-    anita.URL("https://cdn.NetBSD.org/pub/NetBSD/NetBSD-7.1/%s/" % arch),
-    workdir="work-NetBSD-%s" % arch,
+    anita.URL(find_latest_release(branch, arch)),
+    workdir="work-%s-%s" % (branch, arch),
     disk_size="4G",
     memory_size = "1G",
     persist=True)
