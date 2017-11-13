@@ -33,6 +33,7 @@ branch = sys.argv[2]
 commands = [
     """cat > /etc/ifconfig.vioif0 << EOF
 !dhcpcd vioif0
+mtu 1460
 EOF""",
     "dhcpcd",
     """ed /etc/fstab << EOF
