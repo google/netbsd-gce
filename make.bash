@@ -14,7 +14,7 @@
 
 set -e -x
 
-ANITA_VERSION=1.42
+ANITA_VERSION=1.47
 ARCH=${1:-amd64}
 RELEASE=${2:-netbsd-8}
 
