@@ -23,22 +23,21 @@ bash ./make.bash
 ```
 
 it will download a distfile for Anita (an automated NetBSD installation tool),
-which will download and install NetBSD 8_BETA in a virtual machine on the local
+which will download and install NetBSD 9_BETA in a virtual machine on the local
 host. It then adds several tweaks to ensure that networking and storage will
 work on GCE and packs the image into a tar.gz file.
 
-Optionally, you can give the script an architecture (`i386` or `amd64`) and a
-branch name as parameters, for example
+Optionally, you can give the script an architecture (`i386` or `amd64`), a
+branch name and the desired root disk size as parameters, for example
 
 ```
-bash ./make.bash amd64 HEAD
+bash ./make.bash amd64 HEAD 10G
 ```
 
 to install a 64-bit version of NetBSD-current.
 
-**NOTE:** NetBSD versions older than 7.1-RC1 will not work at all, however all
-NetBSD-7 releases are currently quite unstable. NetBSD-8 and NetBSD-current are
-recommended.
+**NOTE:** NetBSD-8 is the oldest supported NetBSD release. NetBSD-9 or
+NetBSD-current are recommended.
 
 **NOTE:** The image will not boot under Anita once the script has finished. This
 is because qemu emulates an IDE hard drive while Google Persistent Disk uses the
