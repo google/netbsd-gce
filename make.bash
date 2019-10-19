@@ -17,6 +17,7 @@ set -e -x
 ANITA_VERSION=2.0
 ARCH=${1:-amd64}
 RELEASE=${2:-netbsd-8}
+DISK_SIZE=${3:-4G}
 
 # Must use GNU tar. On NetBSD, tar is BSD tar and gtar is GNU.
 TAR=tar
@@ -47,7 +48,7 @@ cd anita-${ANITA_VERSION}
 python setup.py build
 cd ..
 
-env PYTHONPATH=${PWD}/anita-${ANITA_VERSION} python mkvm.py ${ARCH} ${RELEASE}
+env PYTHONPATH=${PWD}/anita-${ANITA_VERSION} python mkvm.py ${ARCH} ${RELEASE} ${DISK_SIZE}
 
 echo "Archiving wd0.img (this may take a while)"
 ${TAR} -Szcf netbsd-${ARCH}-gce.tar.gz --transform s,${WORKDIR}/wd0.img,disk.raw, ${WORKDIR}/wd0.img

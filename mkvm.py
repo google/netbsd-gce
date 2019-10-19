@@ -29,6 +29,7 @@ def find_latest_release(branch, arch):
 
 arch = sys.argv[1]
 branch = sys.argv[2]
+disk_size = sys.argv[3]
 
 commands = [
     """cat > /etc/ifconfig.vioif0 << EOF
@@ -48,8 +49,8 @@ EOF""",
 a = anita.Anita(
     anita.URL(find_latest_release(branch, arch)),
     workdir="work-%s-%s" % (branch, arch),
-    disk_size="4G",
-    memory_size = "1G",
+    disk_size=disk_size,
+    memory_size="1G",
     persist=True)
 child = a.boot()
 anita.login(child)
