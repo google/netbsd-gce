@@ -14,7 +14,7 @@
 
 set -e -x
 
-ANITA_VERSION=2.0
+ANITA_VERSION=2.3
 ARCH=${1:-amd64}
 RELEASE=${2:-netbsd-9}
 DISK_SIZE=${3:-4G}
