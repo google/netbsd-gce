@@ -51,5 +51,5 @@ cd ..
 env PYTHONPATH=${PWD}/anita-${ANITA_VERSION} python mkvm.py ${ARCH} ${RELEASE} ${DISK_SIZE}
 
 echo "Archiving wd0.img (this may take a while)"
-${TAR} -Szcf netbsd-${ARCH}-gce.tar.gz --transform s,${WORKDIR}/wd0.img,disk.raw, ${WORKDIR}/wd0.img
+${TAR} --format=oldgnu -Szcf netbsd-${ARCH}-gce.tar.gz --transform s,${WORKDIR}/wd0.img,disk.raw, ${WORKDIR}/wd0.img
 echo "Done. GCE image is netbsd-${ARCH}-gce.tar.gz."
