@@ -8,13 +8,13 @@
 #  - qemu
 #  - cdrtools
 #  - GNU tar (not BSD tar)
-#  - Python 2.7
+#  - Python 3
 #  - python-pexpect
 #  - coreutils (for sha1sum)
 
 set -e -x
 
-ANITA_VERSION=2.3
+ANITA_VERSION=2.9
 ARCH=${1:-amd64}
 RELEASE=${2:-netbsd-9}
 DISK_SIZE=${3:-4G}
