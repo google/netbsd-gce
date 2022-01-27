@@ -13,7 +13,7 @@ the script, you need a few things to be installed:
 * cdrtools
 * GNU tar (http://pkgsrc.se/archivers/gtar)
 * GNU coreutils (http://pkgsrc.se/sysutils/coreutils)
-* Python 2.7
+* Python 3
 * python-pexpect (http://pkgsrc.se/devel/py-pexpect)
 
 When you run
@@ -23,7 +23,7 @@ bash ./make.bash
 ```
 
 it will download a distfile for Anita (an automated NetBSD installation tool),
-which will download and install NetBSD 9_BETA in a virtual machine on the local
+which will download and install NetBSD 9_STABLE in a virtual machine on the local
 host. It then adds several tweaks to ensure that networking and storage will
 work on GCE and packs the image into a tar.gz file.
 
@@ -38,10 +38,6 @@ to install a 64-bit version of NetBSD-current.
 
 **NOTE:** NetBSD-8 is the oldest supported NetBSD release. NetBSD-9 or
 NetBSD-current are recommended.
-
-**NOTE:** The image will not boot under Anita once the script has finished. This
-is because qemu emulates an IDE hard drive while Google Persistent Disk uses the
-`vioscsi` driver.
 
 ## How to use the created image (i.e. how to get started on GCE)
 
