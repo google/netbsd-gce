@@ -30,6 +30,14 @@ if which gsha1sum > /dev/null; then
   SHA1SUM=gsha1sum
 fi
 
+PYTHON=
+for cmd in python3 python; do
+  if which ${cmd} > /dev/null; then
+    PYTHON=${cmd}
+    break
+  fi
+done
+
 WORKDIR=work-${RELEASE}-${ARCH}
 
 # Remove WORKDIR unless -k (keep) is given.
@@ -45,10 +53,10 @@ fi
 
 ${TAR} xfz anita-${ANITA_VERSION}.tar.gz
 cd anita-${ANITA_VERSION}
-python setup.py build
+${PYTHON} setup.py build
 cd ..
 
-env PYTHONPATH=${PWD}/anita-${ANITA_VERSION} python mkvm.py ${ARCH} ${RELEASE} ${DISK_SIZE}
+env PYTHONPATH=${PWD}/anita-${ANITA_VERSION} ${PYTHON} mkvm.py ${ARCH} ${RELEASE} ${DISK_SIZE}
 
 echo "Archiving wd0.img (this may take a while)"
 ${TAR} --format=oldgnu -Szcf netbsd-${ARCH}-gce.tar.gz --transform s,${WORKDIR}/wd0.img,disk.raw, ${WORKDIR}/wd0.img
