@@ -7,24 +7,28 @@ import anita
 import ftplib
 import sys
 
-def find_latest_release(branch, arch):
-  """Find the latest NetBSD-current release for the given arch.
 
-  Returns:
-    the full path to the release.
-  """
-  conn = ftplib.FTP('nyftp.netbsd.org')
-  conn.login()
-  conn.cwd('/pub/NetBSD-daily/%s' % branch)
-  releases = conn.nlst()
-  releases.sort(reverse=True)
-  for r in releases:
-    archs = conn.nlst(r)
-    if not archs:
-      next
-    has_arch = [a for a in archs if a.endswith(arch)]
-    if has_arch:
-      return "https://nycdn.netbsd.org/pub/NetBSD-daily/%s/%s/" % (branch, has_arch[0])
+def find_latest_release(branch, arch):
+    """Find the latest NetBSD-current release for the given arch.
+
+    Returns:
+      the full path to the release.
+    """
+    conn = ftplib.FTP("nyftp.netbsd.org")
+    conn.login()
+    conn.cwd("/pub/NetBSD-daily/%s" % branch)
+    releases = conn.nlst()
+    releases.sort(reverse=True)
+    for r in releases:
+        archs = conn.nlst(r)
+        if not archs:
+            next
+        has_arch = [a for a in archs if a.endswith(arch)]
+        if has_arch:
+            return "https://nycdn.netbsd.org/pub/NetBSD-daily/%s/%s/" % (
+                branch,
+                has_arch[0],
+            )
 
 
 arch = sys.argv[1]
@@ -51,12 +55,13 @@ a = anita.Anita(
     workdir="work-%s-%s" % (branch, arch),
     disk_size=disk_size,
     memory_size="1G",
-    persist=True)
+    persist=True,
+)
 child = a.boot()
 anita.login(child)
 
 for cmd in commands:
-  anita.shell_cmd(child, cmd, 1200)
+    anita.shell_cmd(child, cmd, 1200)
 
 # Sometimes, the halt command times out, even though it has completed
 # successfully.
