@@ -36,9 +36,6 @@ bash ./make.bash amd64 HEAD 10G
 
 to install a 64-bit version of NetBSD-current.
 
-**NOTE:** NetBSD-8 is the oldest supported NetBSD release. NetBSD-9 or
-NetBSD-current are recommended.
-
 ## How to use the created image (i.e. how to get started on GCE)
 
 The how-to below describes how to do the required operations in a web browser.
