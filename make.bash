@@ -14,7 +14,7 @@
 
 set -e -x
 
-ANITA_VERSION=2.10
+ANITA_VERSION=2.11
 ARCH=${1:-amd64}
 RELEASE=${2:-netbsd-10}
 DISK_SIZE=${3:-4G}
@@ -53,9 +53,6 @@ fi
 
 ${TAR} xfz anita-${ANITA_VERSION}.tar.gz
 cd anita-${ANITA_VERSION}
-# Workaround for https://github.com/gson1703/anita/issues/14 on macOS
-curl -o- https://github.com/gson1703/anita/commit/bfe9f04d94806c4830b6195f8c23f3bd085f568b.patch | patch -p1
-# end workaround
 ${PYTHON} setup.py build
 cd ..
 
