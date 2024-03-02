@@ -1,2 +1,2 @@
-anita-2.9
-anita-2.9.tar.gz
+anita-2.*
+!*.sha1
