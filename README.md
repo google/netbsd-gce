@@ -3,6 +3,14 @@
 This repository holds tools to build a NetBSD image for use on Google Compute
 Engine (GCE). GCE is part of the Google Cloud Platform.
 
+> [!IMPORTANT]
+> NetBSD only supports `virtio-net` for networking; there is no support for
+> gVNIC and IDPF network interfaces. GCE Gen 3 and Gen 4 virtual machines
+> *only* support gVNIC.
+>
+> In practice, this means that you can only run NetBSD on N1, N2, E2 and C2
+> machine types, not the newer ones.
+
 ## Running `make.bash`
 
 `make.bash` can be run under a GNU/Linux, BSD or macOS operating system.  To run
