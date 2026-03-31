@@ -14,9 +14,9 @@
 
 set -e -x
 
-ANITA_VERSION=2.11
+ANITA_VERSION=2.17
 ARCH=${1:-amd64}
-RELEASE=${2:-netbsd-10}
+RELEASE=${2:-netbsd-11}
 DISK_SIZE=${3:-4G}
 
 # Must use GNU tar. On NetBSD, tar is BSD tar and gtar is GNU.
