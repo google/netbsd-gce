@@ -23,7 +23,7 @@ bash ./make.bash
 ```
 
 it will download a distfile for Anita (an automated NetBSD installation tool),
-which will download and install NetBSD 9_STABLE in a virtual machine on the local
+which will download and install NetBSD 11 in a virtual machine on the local
 host. It then adds several tweaks to ensure that networking and storage will
 work on GCE and packs the image into a tar.gz file.
 
@@ -43,7 +43,7 @@ You can also use the [Google Cloud SDK](https://cloud.google.com/sdk/) and its
 `gcloud` command line tool.
 
 1.  Run `make.bash` as described above.
-2.  Go to https://cloud.google.com/. Log in with your Google account or
+2.  Go to https://console.cloud.google.com/. Log in with your Google account or
     create a new one. If you never used Google Cloud Platform before, you will
     need to enter a credit card for billing. Yes, running stuff on GCP costs
     money.
